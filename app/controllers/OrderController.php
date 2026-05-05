@@ -45,6 +45,7 @@ class OrderController {
 
         $user_id = $_SESSION['user_id'];
         $payment_method = $_POST['payment_method'] ?? 'Cash on Delivery';
+        $address = $_POST['address'] ?? '';
 
         // 1. Calculate total from cart
         $cartQuery = "SELECT ci.item_id, ci.quantity, f.price, c.id as cart_id
@@ -73,10 +74,11 @@ class OrderController {
             $this->conn->beginTransaction();
 
             // 2. Create Order
-            $orderQuery = "INSERT INTO orders (user_id, total_price, status) VALUES (:user_id, :total, 'Pending')";
+            $orderQuery = "INSERT INTO orders (user_id, total_price, status, delivery_address) VALUES (:user_id, :total, 'Pending', :address)";
             $orderStmt = $this->conn->prepare($orderQuery);
             $orderStmt->bindParam(":user_id", $user_id);
             $orderStmt->bindParam(":total", $total);
+            $orderStmt->bindParam(":address", $address);
             $orderStmt->execute();
             $order_id = $this->conn->lastInsertId();
 

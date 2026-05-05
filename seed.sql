@@ -61,8 +61,8 @@ INSERT INTO `food_items` (`id`, `category_id`, `name`, `description`, `price`, `
 -- ==============================================
 -- 4. Seed Carts & Cart Items (Active Carts)
 -- ==============================================
-INSERT INTO `carts` (`id`, `user_id`) VALUES
-(1, 2);
+INSERT INTO `carts` (`id`, `user_id`, `created_at`) VALUES
+(1, 2, NOW());
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `item_id`, `quantity`) VALUES
 (1, 1, 1, 2),
@@ -72,10 +72,10 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `item_id`, `quantity`) VALUES
 -- ==============================================
 -- 5. Seed Orders
 -- ==============================================
-INSERT INTO `orders` (`id`, `user_id`, `total_price`, `status`, `created_at`) VALUES
-(1, 2, 95.00, 'Delivered', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(2, 3, 57.00, 'Preparing', DATE_SUB(NOW(), INTERVAL 1 HOUR)),
-(3, 2, 48.00, 'Pending', NOW());
+INSERT INTO `orders` (`id`, `user_id`, `total_price`, `status`, `delivery_address`, `created_at`) VALUES
+(1, 2, 95.00, 'Delivered', '123 Main St, Apt 4B, Riyadh', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(2, 3, 57.00, 'Preparing', '456 King Fahd Rd, Jeddah', DATE_SUB(NOW(), INTERVAL 1 HOUR)),
+(3, 2, 48.00, 'Pending', '123 Main St, Apt 4B, Riyadh', NOW());
 
 -- ==============================================
 -- 6. Seed Order Items
@@ -98,7 +98,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `quantity`, `price`) VAL
 -- ==============================================
 -- 7. Seed Payments
 -- ==============================================
-INSERT INTO `payments` (`id`, `order_id`, `amount`, `method`, `status`) VALUES
-(1, 1, 95.00, 'Cash on Delivery', 'Completed'),
-(2, 2, 57.00, 'Cash on Delivery', 'Pending'),
-(3, 3, 48.00, 'Cash on Delivery', 'Pending');
+INSERT INTO `payments` (`id`, `order_id`, `amount`, `method`, `status`, `created_at`) VALUES
+(1, 1, 95.00, 'Cash on Delivery', 'Completed', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(2, 2, 57.00, 'Cash on Delivery', 'Pending', DATE_SUB(NOW(), INTERVAL 1 HOUR)),
+(3, 3, 48.00, 'Cash on Delivery', 'Pending', NOW());

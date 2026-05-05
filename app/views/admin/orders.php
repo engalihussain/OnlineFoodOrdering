@@ -38,6 +38,7 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                     </tr>
@@ -49,6 +50,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo htmlspecialchars($order['customer_name']); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900"><?php echo number_format($order['total_price'], 2); ?> SAR</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo date('M d, Y H:i', strtotime($order['created_at'])); ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate max-w-xs" title="<?php echo htmlspecialchars($order['delivery_address'] ?? 'N/A'); ?>"><?php echo htmlspecialchars($order['delivery_address'] ?? 'N/A'); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <?php 
                                     $statusColor = 'bg-gray-100 text-gray-800';
@@ -76,7 +78,7 @@
                     <?php endforeach; ?>
                     <?php if(empty($orders)): ?>
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">No orders found.</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">No orders found.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

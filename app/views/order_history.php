@@ -29,6 +29,7 @@
                                 'id' => $order['id'],
                                 'status' => $order['status'],
                                 'date' => date('M d, Y H:i A', strtotime($order['created_at'])),
+                                'address' => $order['delivery_address'] ?? 'No Address Provided',
                                 'total' => number_format($order['total_price'], 2),
                                 'items' => $items
                             ];
@@ -101,7 +102,8 @@
                         <span class="font-semibold text-gray-700">Order ID: <span id="modal-order-id" class="text-orange-600"></span></span>
                         <span id="modal-order-status" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800"></span>
                     </div>
-                    <p class="text-xs text-gray-500 mb-4" id="modal-order-date"></p>
+                    <p class="text-xs text-gray-500 mb-2" id="modal-order-date"></p>
+                    <p class="text-sm text-gray-700 mb-4 font-medium"><i class="fas fa-map-marker-alt mr-1 text-orange-500"></i> <span id="modal-order-address"></span></p>
                     
                     <div class="border-t border-gray-200 pt-4">
                         <h4 class="text-sm font-bold text-gray-900 mb-2">Items</h4>
@@ -131,6 +133,7 @@ function openOrderModal(element) {
     
     document.getElementById('modal-order-id').innerText = '#' + orderData.id;
     document.getElementById('modal-order-date').innerText = 'Placed on ' + orderData.date;
+    document.getElementById('modal-order-address').innerText = orderData.address;
     document.getElementById('modal-total-price').innerText = orderData.total + ' SAR';
     
     const statusBadge = document.getElementById('modal-order-status');
